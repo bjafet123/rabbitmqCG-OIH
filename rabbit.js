@@ -68,7 +68,8 @@ module.exports.producerMessage = async (message) => {
         await ch.bindQueue(queue.queue, exchangeDLX, routingKey);
 
         //ch.sendToQueue(queue.queue, new Buffer.from(message.toString()),{persistent: true});
-        ch.publish(exchangeDLX, routingKey, new Buffer.from(message.toString()),{persistent: true});
+        const trace = {"Message": message.toString()}
+        ch.publish(exchangeDLX, routingKey, new Buffer.from(JSON.stringify(trace)),{persistent: true});
 
         await ch.close();
     }catch (e){
@@ -106,7 +107,7 @@ module.exports.producerErrorMessage = async (payload, error) => {
 
         //ch.sendToQueue(queue.queue, new Buffer.from(message.toString()),{persistent: true});
         const emsg = error.toString();
-        const trace = {"ErrorMessage": emsg, "Payload": payload.toString()}
+        const trace = {"ErrorMessage": emsg, "Payload": payload.toString()};
         ch.publish(exchangeDLX, routingKey, new Buffer.from(JSON.stringify(trace)), {persistent: true});
 
         await ch.close();
