@@ -1,6 +1,10 @@
+[![N|Solid](https://cloudgensys.com/cg-demo/wp-content/uploads/2019/05/CG-Logo-01.png)](https://www.cloudgensys.com/)
+
 # rabbitmqCG-OIH
 
-1. Introduction
+[![N|Solid](https://raw.githubusercontent.com/bjafet123/rabbitmqCG-OIH/3b3aab3788673bdd68cb3d3f395ad92a9a832414/rabbitmqCG-OIH.svg)](https://github.com/bjafet123/rabbitmqCG-OIH.git)
+
+## _1. Introduction_
 
 This code has the objective to send messages to a rabbitmq queues for the Open Integration Hub (OIH). This messages primarily will send an error message from OIH components to be handled.
 
@@ -10,37 +14,38 @@ As components are used in the OIH flows regardless that the library should be ad
 
 The queue naming structure is as follows:
 
+```
 flow – flowID : stepName : messages
 flow – flowID : stepName : rebounds
+```
 
-
+![](https://github.com/bjafet123/rabbitmqCG-OIH/blob/main/rm-files/rm-img-01.png?raw=true)
 
 Using the same structure for the OIH error handler queue (for each step) the next queue is created, internally, by the rabbitmqCG-OIH library.
 
+```
 flow – flowID : stepName : deadletter
+```
 
 And it is configured an exchange (the same used by the other queues).
 
-
+![](https://github.com/bjafet123/rabbitmqCG-OIH/blob/main/rm-files/rm-image-02.png?raw=true)
 
 Once this configuration is created by the library, messages can be sent to this queue.
 
-
-
-
-
-2. Library Methods
+## _2.	Library Methods_
 
 The library can be installed from npm page with the next:
 
-npm install rabbitmqcg-oih or npm i rabbitmqcg-oih
+**npm install rabbitmqcg-oih** or **npm i rabbitmqcg-oih**
 
-2.1. prepareErrorQueue
+### _2.1.	prepareErrorQueue_
 
-Args:No arguments are required.Description:This method prepares the queue (deadletter) and the relation to the exchange, creating the queues and/or exchange if do not exist.
-
-Once the code is set, at run time each time it occurs an error, a message is sent to the configured queue.
-Sample://Sample applied into a component function for OIH
+- **Args:** No arguments are required.
+- **Description:** This method prepares the queue (_deadletter_) and the relation to the exchange, creating the queues and/or exchange if do not exist.|
+- **Sample:**
+```js
+//Sample applied into a component function for OIH
 
 module.exports.process = async function processTrigger(msg, cfg, snapshot = {}) {
       try {
@@ -51,33 +56,8 @@ module.exports.process = async function processTrigger(msg, cfg, snapshot = {}) 
         this.emit(‘error’, trace);
     }
 };
-
+```
+
 Resultant sample:
 
-
-
-
-
-
-2.2. producerMessage
-
-Args:Message: A String that contains the message to be sent to the deadletter queue.
-Description:This method prepares the queue (deadletter) and the relation to the exchange, creating the queues and/or exchange if do not exist.
-
-Once the code is set, at the time the code line is executed, the message content is sent to the queue.
-Sample://Sample applied into a component function for OIH
-
-module.exports.process = async function processTrigger(msg, cfg, snapshot = {}) {
-      try {
-            await rabbitmq.producerMessage();
-            //Your code here...
-      } catch (e) {
-        console.error(`ERROR: ${e}`);
-        this.emit(‘error’, trace);
-    }
-};
-
-
-
-
-test
+![](https://github.com/bjafet123/rabbitmqCG-OIH/blob/main/rm-files/rm-img-03.png?raw=true)
