@@ -54,7 +54,7 @@ module.exports.process = async function processTrigger(msg, cfg, snapshot = {}) 
             //Your code here...
       } catch (e) {
         console.error(`ERROR: ${e}`);
-        this.emit(‘error’, trace);
+        this.emit(‘error’, e);
     }
 };
 ```
@@ -78,7 +78,7 @@ module.exports.process = async function processTrigger(msg, cfg, snapshot = {}) 
             //Your code here...
       } catch (e) {
         console.error(`ERROR: ${e}`);
-        this.emit(‘error’, trace);
+        this.emit(‘error’, e);
     }
 };
 ```
@@ -86,3 +86,30 @@ module.exports.process = async function processTrigger(msg, cfg, snapshot = {}) 
 Resultant sample:
 
 ![](https://github.com/bjafet123/rabbitmqCG-OIH/blob/main/rm-files/rm-img-04.png?raw=true)
+
+### _2.3. producerErrorMessage_
+
+- **Args:** 
+    - Payload: The content of a request.
+    - Error: The error message.
+- **Description:** This method prepares the queue (deadletter) and the relation to the exchange, creating the queues and/or exchange if do not exist. 
+Once the code is set, at the time an error is catched a message is sent to the queue with the payload content and with the error message.
+- **Sample:**
+```js
+//Sample applied into a component function for OIH
+
+module.exports.process = async function processTrigger(msg, cfg, snapshot = {}) {
+      try {
+            let {data} = msg;
+            //Your code here...
+      } catch (e) {
+        console.error(`ERROR: ${e}`);
+        this.emit(‘error’, e);
+        await rabbit.producerErrorMessage(data, e);
+    }
+};
+```
+
+Resultant sample:
+
+![](https://github.com/bjafet123/rabbitmqCG-OIH/blob/main/rm-files/rm-img-05.png?raw=true)
