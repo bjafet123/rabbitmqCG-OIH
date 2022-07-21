@@ -6,8 +6,8 @@ module.exports.prepareErrorQueue = async () => {
 
     try{
         
-        let exchangeDLX = 'exchangeDLX';
-        let queueDLX = 'queueDLX';
+        let exchangeDLX = 'error-exchange';
+        let queueDLX = 'error-queue';
         let routingKey = '';
         if (process.env.ELASTICIO_LISTEN_MESSAGES_ON) {
         	const componentProp = process.env.ELASTICIO_LISTEN_MESSAGES_ON.split(":");
@@ -39,11 +39,11 @@ module.exports.prepareErrorQueue = async () => {
     }
 };
 
-module.exports.producerMessage = async (message) => {
+module.exports.producerMessage = async (message, queue) => {
 
     try{
-        let exchangeDLX = 'exchangeDLX';
-        let queueDLX = 'queueDLX';
+        let exchangeDLX = 'message-exchange';
+        let queueDLX = 'message-queue';
         let routingKey = '';
         if (process.env.ELASTICIO_LISTEN_MESSAGES_ON) {
         	const componentProp = process.env.ELASTICIO_LISTEN_MESSAGES_ON.split(":");
@@ -80,8 +80,8 @@ module.exports.producerMessage = async (message) => {
 module.exports.producerErrorMessage = async (payload, error) => {
 
     try{
-        let exchangeDLX = 'exchangeDLX';
-        let queueDLX = 'queueDLX';
+        let exchangeDLX = 'error-exchange';
+        let queueDLX = 'error-queue';
         let routingKey = '';
         if (process.env.ELASTICIO_LISTEN_MESSAGES_ON) {
         	const componentProp = process.env.ELASTICIO_LISTEN_MESSAGES_ON.split(":");

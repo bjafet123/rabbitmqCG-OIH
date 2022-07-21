@@ -54,7 +54,7 @@ module.exports.process = async function processTrigger(msg, cfg, snapshot = {}) 
             //Your code here...
       } catch (e) {
         console.error(`ERROR: ${e}`);
-        this.emit(‘error’, e);
+        this.emit('error', e);
     }
 };
 ```
@@ -78,7 +78,7 @@ module.exports.process = async function processTrigger(msg, cfg, snapshot = {}) 
             //Your code here...
       } catch (e) {
         console.error(`ERROR: ${e}`);
-        this.emit(‘error’, e);
+        this.emit('error', e);
     }
 };
 ```
@@ -104,7 +104,7 @@ module.exports.process = async function processTrigger(msg, cfg, snapshot = {}) 
             //Your code here...
       } catch (e) {
         console.error(`ERROR: ${e}`);
-        this.emit(‘error’, e);
+        this.emit('error', e);
         await rabbit.producerErrorMessage(msg, e);
     }
 };
