@@ -17,7 +17,7 @@ The queue naming structure is as follows:
 ```
 flow – flowID : stepName : messages
 flow – flowID : stepName : rebounds
-```
+```  
 
 ![](https://github.com/bjafet123/rabbitmqCG-OIH/blob/main/rm-files/rm-img-01.png?raw=true)
 
@@ -26,6 +26,8 @@ Using the same structure for the OIH error handler queue (for each step) the nex
 ```
 flow – flowID : stepName : deadletter
 ```
+
+Where _"flow"_ is a constant word, the _"flowID"_ is the ID assigned by the OIH to the flow, the _"stepName"_ is the name configured to each node in the flow and the words _"message"_/_"rebounds"_/_"deadletter"_ are constants.
 
 And it is configured an exchange (the same used by the other queues).
 
@@ -63,9 +65,13 @@ Resultant sample:
 
 ![](https://github.com/bjafet123/rabbitmqCG-OIH/blob/main/rm-files/rm-img-03.png?raw=true)
 
+\* **Note:** The library requires that the OIH has the _"ELASTICIO_LISTEN_MESSAGES_ON"_ environment variable. If this variable is not available, the library defines an auto-generated queue and exchange. 
+
 ### _2.2. producerMessage_
 
-- **Args:** Message: A String that contains the message to be sent to the deadletter queue.
+- **Args:** 
+    - Message: A String that contains the message to be sent to the deadletter queue.
+    - QueueName: The given name of the queue that will receive the messages to be handled.  
 - **Description:** This method prepares the queue (deadletter) and the relation to the exchange, creating the queues and/or exchange if do not exist. 
 Once the code is set, at the time the code line is executed, the message content is sent to the queue.
 - **Sample:**
@@ -74,7 +80,7 @@ Once the code is set, at the time the code line is executed, the message content
 
 module.exports.process = async function processTrigger(msg, cfg, snapshot = {}) {
       try {
-            await rabbitmq.producerMessage(msg);
+            await rabbitmq.producerMessage(msg,'myQueueName');
             //Your code here...
       } catch (e) {
         console.error(`ERROR: ${e}`);
@@ -86,6 +92,8 @@ module.exports.process = async function processTrigger(msg, cfg, snapshot = {}) 
 Resultant sample:
 
 ![](https://github.com/bjafet123/rabbitmqCG-OIH/blob/main/rm-files/rm-img-04.png?raw=true)
+
+\* **Note:** The library requires that the OIH has the _"ELASTICIO_LISTEN_MESSAGES_ON"_ environment variable. If this variable is not available, the library defines an auto-generated queue and exchange (using the QueueName argument).
 
 ### _2.3. producerErrorMessage_
 
@@ -113,3 +121,5 @@ module.exports.process = async function processTrigger(msg, cfg, snapshot = {}) 
 Resultant sample:
 
 ![](https://github.com/bjafet123/rabbitmqCG-OIH/blob/main/rm-files/rm-img-05.png?raw=true)
+
+\* **Note:** The library requires that the OIH has the _"ELASTICIO_LISTEN_MESSAGES_ON"_ environment variable. If this variable is not available, the library defines an auto-generated queue and exchange.

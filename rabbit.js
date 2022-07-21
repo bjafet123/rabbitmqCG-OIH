@@ -3,12 +3,11 @@ const amqp = require('amqplib');
 const log = require('./helpers/logger');
 
 module.exports.prepareErrorQueue = async () => {
-
     try{
-        
-        let exchangeDLX = 'error-exchange';
-        let queueDLX = 'error-queue';
-        let routingKey = '';
+        const random = getRandomInt();
+        let exchangeDLX = 'error-queue';
+        let queueDLX = 'error-queue:' + random + ':deadletter';
+        let routingKey = 'error-queue.' + random + '.deadletter';;
         if (process.env.ELASTICIO_LISTEN_MESSAGES_ON) {
         	const componentProp = process.env.ELASTICIO_LISTEN_MESSAGES_ON.split(":");
         	if (componentProp) {
@@ -39,18 +38,17 @@ module.exports.prepareErrorQueue = async () => {
     }
 };
 
-module.exports.producerMessage = async (message, queue) => {
-
+module.exports.producerMessage = async (message, queueName) => {
     try{
-        let exchangeDLX = 'message-exchange';
-        let queueDLX = 'message-queue';
-        let routingKey = '';
+        let exchangeDLX = 'message-queue';
+        let queueDLX = 'message-queue:' + queueName + ':analitics';
+        let routingKey = 'message-queue.' + queueName + '.analitics';
         if (process.env.ELASTICIO_LISTEN_MESSAGES_ON) {
         	const componentProp = process.env.ELASTICIO_LISTEN_MESSAGES_ON.split(":");
         	if (componentProp) {
 		        exchangeDLX = componentProp[0];
-		        queueDLX = componentProp[0] + ':' + componentProp[1] + ':deadletter';
-		        routingKey = componentProp[0] + '.' + componentProp[1] + '.deadletter';
+		        queueDLX = componentProp[0] + ':' + queueName + ':analitics';
+		        routingKey = componentProp[0] + '.' + queueName + '.analitics';
 	        }
         }
         log.info(queueDLX);
@@ -78,11 +76,11 @@ module.exports.producerMessage = async (message, queue) => {
 };
 
 module.exports.producerErrorMessage = async (payload, error) => {
-
     try{
-        let exchangeDLX = 'error-exchange';
-        let queueDLX = 'error-queue';
-        let routingKey = '';
+        const random = getRandomInt();
+        let exchangeDLX = 'error-queue';
+        let queueDLX = 'error-queue:' + random + ':deadletter';;
+        let routingKey = 'error-queue.' + random + '.deadletter';;
         if (process.env.ELASTICIO_LISTEN_MESSAGES_ON) {
         	const componentProp = process.env.ELASTICIO_LISTEN_MESSAGES_ON.split(":");
         	if (componentProp) {
@@ -115,3 +113,8 @@ module.exports.producerErrorMessage = async (payload, error) => {
         log.error(`ERROR on rabbit: ${e}`);
     }
 };
+
+//This function creates a random number used when a queue can't be defined
+function getRandomInt() {
+  return Math.random().toString().split(".")[1].substring(0,8);
+}
