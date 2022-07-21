@@ -135,3 +135,5 @@ To run the testing code the next command can be used (**the starting location mu
 ```sh
 npm test
 ```
+
+![](https://github.com/bjafet123/rabbitmqCG-OIH/blob/main/rm-files/rm-img-06.png?raw=true)
