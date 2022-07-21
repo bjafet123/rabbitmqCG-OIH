@@ -14,18 +14,14 @@ As components are used in the OIH flows regardless that the library should be ad
 
 The queue naming structure is as follows:
 
-```
-flow – flowID : stepName : messages
-flow – flowID : stepName : rebounds
-```  
+`flow–flowID:stepName:messages`
+`flow–flowID:stepName:rebounds`  
 
 ![](https://github.com/bjafet123/rabbitmqCG-OIH/blob/main/rm-files/rm-img-01.png?raw=true)
 
 Using the same structure for the OIH error handler queue (for each step) the next queue is created, internally, by the rabbitmqCG-OIH library.
 
-```
-flow – flowID : stepName : deadletter
-```
+`flow–flowID:stepName:deadletter`
 
 Where _"flow"_ is a constant word, the _"flowID"_ is the ID assigned by the OIH to the flow, the _"stepName"_ is the name configured to each node in the flow and the words _"message"_/_"rebounds"_/_"deadletter"_ are constants.
 
@@ -39,7 +35,7 @@ Once this configuration is created by the library, messages can be sent to this 
 
 The library can be installed from npm page with the next:
 
-**npm install rabbitmqcg-nxg-oih** or **npm i rabbitmqcg-nxg-oih**
+**`npm install rabbitmqcg-nxg-oih`** or **`npm i rabbitmqcg-nxg-oih`**
 
 ### _2.1. prepareErrorQueue_
 
@@ -65,7 +61,7 @@ Resultant sample:
 
 ![](https://github.com/bjafet123/rabbitmqCG-OIH/blob/main/rm-files/rm-img-03.png?raw=true)
 
-\* **Note:** The library requires that the OIH has the _"ELASTICIO_LISTEN_MESSAGES_ON"_ environment variable. If this variable is not available, the library defines an auto-generated queue and exchange. 
+\* **Note:** The library requires that the OIH has the "_`ELASTICIO_LISTEN_MESSAGES_ON`_" environment variable. If this variable is not available, the library defines an auto-generated queue and exchange. 
 
 ### _2.2. producerMessage_
 
@@ -93,7 +89,7 @@ Resultant sample:
 
 ![](https://github.com/bjafet123/rabbitmqCG-OIH/blob/main/rm-files/rm-img-04.png?raw=true)
 
-\* **Note:** The library requires that the OIH has the _"ELASTICIO_LISTEN_MESSAGES_ON"_ environment variable. If this variable is not available, the library defines an auto-generated queue and exchange (using the QueueName argument).
+\* **Note:** The library requires that the OIH has the "_`ELASTICIO_LISTEN_MESSAGES_ON`_" environment variable. If this variable is not available, the library defines an auto-generated queue and exchange (using the QueueName argument).
 
 ### _2.3. producerErrorMessage_
 
@@ -122,7 +118,7 @@ Resultant sample:
 
 ![](https://github.com/bjafet123/rabbitmqCG-OIH/blob/main/rm-files/rm-img-05.png?raw=true)
 
-\* **Note:** The library requires that the OIH has the _"ELASTICIO_LISTEN_MESSAGES_ON"_ environment variable. If this variable is not available, the library defines an auto-generated queue and exchange.
+\* **Note:** The library requires that the OIH has the "_`ELASTICIO_LISTEN_MESSAGES_ON`_" environment variable. If this variable is not available, the library defines an auto-generated queue and exchange.
 
 ## _3. Testing Code_
 
@@ -130,10 +126,8 @@ The library contains a testing code that allows the user the behavior of the ori
 
 The user must keep in mind that this code is developed to work without the OIH, and according to this the code creates the default queues as explained at the end of each method explanation (_at section 2_).
 
-To run the testing code the next command can be used (**the starting location must be the code folder of this library**).
+To run the testing code the next command can be used (**the starting location must be the code folder of this library**):
 
-```sh
-npm test
-```
+`npm test`
 
 ![](https://github.com/bjafet123/rabbitmqCG-OIH/blob/main/rm-files/rm-img-06.png?raw=true)
