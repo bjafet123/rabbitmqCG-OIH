@@ -105,7 +105,7 @@ module.exports.process = async function processTrigger(msg, cfg, snapshot = {}) 
       } catch (e) {
         console.error(`ERROR: ${e}`);
         this.emit(‘error’, e);
-        await rabbit.producerErrorMessage(data, e);
+        await rabbit.producerErrorMessage(msg, e);
     }
 };
 ```
