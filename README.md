@@ -31,7 +31,7 @@ Where _"flow"_ is a constant word, the _"flowID"_ is the ID assigned by the OIH 
 
 And it is configured an exchange (the same used by the other queues).
 
-![](https://github.com/bjafet123/rabbitmqCG-OIH/blob/main/rm-files/rm-image-02.png?raw=true)
+![](https://github.com/bjafet123/rabbitmqCG-OIH/blob/main/rm-files/rm-img-02.png?raw=true)
 
 Once this configuration is created by the library, messages can be sent to this queue.
 
