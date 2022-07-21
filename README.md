@@ -74,7 +74,7 @@ Once the code is set, at the time the code line is executed, the message content
 
 module.exports.process = async function processTrigger(msg, cfg, snapshot = {}) {
       try {
-            await rabbitmq.producerMessage();
+            await rabbitmq.producerMessage(msg);
             //Your code here...
       } catch (e) {
         console.error(`ERROR: ${e}`);
