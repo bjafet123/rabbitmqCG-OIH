@@ -15,6 +15,7 @@ As components are used in the OIH flows regardless that the library should be ad
 The queue naming structure is as follows:
 
 `flow–flowID:stepName:messages`
+
 `flow–flowID:stepName:rebounds`  
 
 ![](https://github.com/bjafet123/rabbitmqCG-OIH/blob/main/rm-files/rm-img-01.png?raw=true)
