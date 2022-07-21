@@ -39,7 +39,7 @@ Once this configuration is created by the library, messages can be sent to this 
 
 The library can be installed from npm page with the next:
 
-**npm install rabbitmqcg-oih** or **npm i rabbitmqcg-oih**
+**npm install rabbitmqcg-nxg-oih** or **npm i rabbitmqcg-nxg-oih**
 
 ### _2.1. prepareErrorQueue_
 
