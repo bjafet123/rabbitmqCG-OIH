@@ -93,7 +93,7 @@ Resultant sample:
     - Payload: The content of a request.
     - Error: The error message.
 - **Description:** This method prepares the queue (deadletter) and the relation to the exchange, creating the queues and/or exchange if do not exist. 
-Once the code is set, at the time an error is catched a message is sent to the queue with the payload content and with the error message.
+Once the code is set, at the time an error is catched and the code is executed a message is sent to the queue with the payload content and with the error message.
 - **Sample:**
 ```js
 //Sample applied into a component function for OIH
