@@ -123,3 +123,15 @@ Resultant sample:
 ![](https://github.com/bjafet123/rabbitmqCG-OIH/blob/main/rm-files/rm-img-05.png?raw=true)
 
 \* **Note:** The library requires that the OIH has the _"ELASTICIO_LISTEN_MESSAGES_ON"_ environment variable. If this variable is not available, the library defines an auto-generated queue and exchange.
+
+## _3. Testing Code_
+
+The library contains a testing code that allows the user the behavior of the original code. This sample code shows to the user how to use the methods the library has.
+
+The user must keep in mind that this code is developed to work without the OIH, and according to this the code creates the default queues as explained at the end of each method explanation (_at section 2_).
+
+To run the testing code the next command can be used (**the starting location must be the code folder of this library**).
+
+```sh
+npm test
+```

@@ -30,8 +30,6 @@ module.exports.prepareErrorQueue = async () => {
 
         await ch.bindQueue(queue.queue, exchangeDLX, routingKey);
 
-        //ch.sendToQueue(queue.queue, new Buffer.from(message.toString()),{persistent: true});
-
         await ch.close();
     }catch (e){
         log.error(`ERROR on rabbit: ${e}`);
