@@ -39,10 +39,11 @@ The library can be installed from npm page with the next:
 
 **npm install rabbitmqcg-oih** or **npm i rabbitmqcg-oih**
 
-### _2.1.	prepareErrorQueue_
+### _2.1. prepareErrorQueue_
 
 - **Args:** No arguments are required.
-- **Description:** This method prepares the queue (_deadletter_) and the relation to the exchange, creating the queues and/or exchange if do not exist.|
+- **Description:** This method prepares the queue (deadletter) and the relation to the exchange, creating the queues and/or exchange if do not exist.
+Once the code is set, at run time each time it occurs an error, a message is sent to the configured queue.
 - **Sample:**
 ```js
 //Sample applied into a component function for OIH
@@ -61,3 +62,27 @@ module.exports.process = async function processTrigger(msg, cfg, snapshot = {}) 
 Resultant sample:
 
 ![](https://github.com/bjafet123/rabbitmqCG-OIH/blob/main/rm-files/rm-img-03.png?raw=true)
+
+### _2.2. producerMessage_
+
+- **Args:** Message: A String that contains the message to be sent to the deadletter queue.
+- **Description:** This method prepares the queue (deadletter) and the relation to the exchange, creating the queues and/or exchange if do not exist. 
+Once the code is set, at the time the code line is executed, the message content is sent to the queue.
+- **Sample:**
+```js
+//Sample applied into a component function for OIH
+
+module.exports.process = async function processTrigger(msg, cfg, snapshot = {}) {
+      try {
+            await rabbitmq.producerMessage();
+            //Your code here...
+      } catch (e) {
+        console.error(`ERROR: ${e}`);
+        this.emit(‘error’, trace);
+    }
+};
+```
+
+Resultant sample:
+
+![](https://github.com/bjafet123/rabbitmqCG-OIH/blob/main/rm-files/rm-img-04.png?raw=true)
