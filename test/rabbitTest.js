@@ -2,7 +2,7 @@ require('dotenv').config();
 const amqp = require('amqplib');
 const log = require('../helpers/logger');
 
-module.exports.prepareErrorQueue = async () => {
+module.exports.errorQueueListener = async () => {
     try{
         const random = getRandomInt();
         let exchangeDLX = 'error-queue';
@@ -47,7 +47,7 @@ module.exports.producerMessage = async (message, queueName) => {
 
         await ch.bindQueue(queue.queue, exchangeDLX, routingKey);
 
-        const trace = {"Message": message.toString()}
+        const trace = {"message": message.toString()}
         ch.publish(exchangeDLX, routingKey, new Buffer.from(JSON.stringify(trace)),{persistent: true});
 
         await ch.close();
@@ -77,7 +77,7 @@ module.exports.producerErrorMessage = async (payload, error) => {
         await ch.bindQueue(queue.queue, exchangeDLX, routingKey);
 
         const emsg = error.toString();
-        const trace = {"ErrorMessage": emsg, "Payload": JSON.stringify(payload)};
+        const trace = {"error-message": emsg, "payload": JSON.stringify(payload)};
         ch.publish(exchangeDLX, routingKey, new Buffer.from(JSON.stringify(trace)), {persistent: true});
 
         await ch.close();

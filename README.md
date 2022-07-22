@@ -36,9 +36,9 @@ Once this configuration is created by the library, messages can be sent to this 
 
 The library can be installed from npm page with the next:
 
-**`npm install rabbitmqcg-nxg-oih`** or **`npm i rabbitmqcg-nxg-oih`**
+**`npm install rabbitmqcg-nxg-oih`**, **`npm i rabbitmqcg-nxg-oih`** or **`yarn install rabbitmqcg-nxg-oih`**
 
-### _2.1. prepareErrorQueue_
+### _2.1. errorQueueListener
 
 - **Args:** No arguments are required.
 - **Description:** This method prepares the queue (deadletter) and the relation to the exchange, creating the queues and/or exchange if do not exist.
