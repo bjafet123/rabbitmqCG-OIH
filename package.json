@@ -17,7 +17,8 @@
     "CloudGen",
     "NexGen",
     "components",
-    "error"
+    "error",
+    "messages"
   ],
   "author": "Jafet Malvaez Lopez <jafet.malvaez@cloudgensys.com> (https://www.cloudgensys.com/)",
   "license": "ISC",
