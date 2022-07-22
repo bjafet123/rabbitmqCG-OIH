@@ -2,7 +2,7 @@
 
 # rabbitmqCG-OIH
 
-[![N|Solid](https://raw.githubusercontent.com/bjafet123/rabbitmqCG-OIH/033df3857df6792644c714314019dd2e6b4d44bd/rm-files/rabbitmqCG-OIH.svg)](https://github.com/bjafet123/rabbitmqCG-OIH.git)
+[![N|Solid](https://raw.githubusercontent.com/bjafet123/rabbitmqCG-OIH/f6666a262fb025226382cbed88057bd2a9909591/rm-files/rabbitmqCG-OIH.svg)](https://github.com/bjafet123/rabbitmqCG-OIH.git)
 
 ## _1. Introduction_
 
